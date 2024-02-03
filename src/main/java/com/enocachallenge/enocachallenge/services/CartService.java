@@ -61,4 +61,8 @@ public class CartService {
         List<Product> prdcts = cart.getProducts();
         return prdcts.remove(productId);
     }
+
+    public Cart getCart(int cartId) {
+        return cartRepository.findById(cartId).orElse(null);
+    }
 }

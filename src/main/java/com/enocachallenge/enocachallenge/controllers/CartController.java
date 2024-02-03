@@ -20,7 +20,10 @@ public class CartController {
         this.cartService = cartService;
     }
 
-
+    @GetMapping
+    public Cart getCart(@PathVariable  int cartId){
+        return cartService.getCart(cartId);
+    }
     @PostMapping
     public Cart createCart(@RequestBody String userId) {
         JSONObject jsonObject = new JSONObject(userId);
