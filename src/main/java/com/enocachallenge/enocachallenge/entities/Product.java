@@ -10,6 +10,7 @@ import lombok.Setter;
 @Setter
 @Table(name = "products")
 public class Product extends BaseEntity{
+    String product_code;
     String product_name;
     String product_desc;
     int product_stock;

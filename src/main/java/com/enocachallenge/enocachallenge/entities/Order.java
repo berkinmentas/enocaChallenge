@@ -24,5 +24,8 @@ public class Order extends BaseEntity{
     int amount;
     double total_price;
     String status;
+    @OneToMany
+    @JoinColumn(name = "product_id")
+    private List<Product> products = new ArrayList<>();
 
 }

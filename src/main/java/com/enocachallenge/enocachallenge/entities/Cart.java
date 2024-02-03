@@ -1,6 +1,8 @@
 package com.enocachallenge.enocachallenge.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
@@ -14,12 +16,14 @@ import java.util.List;
 @Setter
 @Table(name= "cart")
 public class Cart extends BaseEntity {
-    @OneToOne
+    @JsonBackReference
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private Customer customer;
-    @OneToMany
-    @JoinColumn(name = "product_id",nullable = false)
-    private List<Product> products  = new ArrayList<>();
-
+    private double totalPrice;
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    private List<Product> products = new ArrayList<>();
+    public void addProduct(Product product){
+        products.add(product);
+    }
 }
